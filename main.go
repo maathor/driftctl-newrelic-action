@@ -25,6 +25,8 @@ func main() {
 	newRelicLicenseKey := os.Getenv("INPUT_NEW_RELIC_LICENCE_KEY")
 	github_repository := os.Getenv("INPUT_GITHUB_REPOSITORY")
 	github_run_id := os.Getenv("INPUT_GITHUB_RUN_ID")
+	tagKey := os.Getenv("TAG_KEY")
+	tagValue := os.Getenv("TAG_VALUE")
 	stage := os.Getenv("INPUT_ENV")
 	summary := parseSummaryDrifctlOutput(os.Args[1])
 	app := initNewRelicClient(newRelicLicenseKey)
@@ -32,6 +34,7 @@ func main() {
 
 	if err := app.RecordCustomEvent(newRelicEventType,map[string]interface{}{
 		"env": stage,
+		tagKey: tagValue,
 		"total_resources": summary.TotalResources,
 		"total_changed": summary.TotalChanged,
 		"total_unmanaged" : summary.TotalUnmanaged,
