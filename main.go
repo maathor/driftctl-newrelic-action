@@ -34,7 +34,7 @@ func main() {
 
 	if err := app.RecordCustomEvent(newRelicEventType,map[string]interface{}{
 		"env": stage,
-		tagKey: tagValue,
+		"tag_value": tagValue,
 		"total_resources": summary.TotalResources,
 		"total_changed": summary.TotalChanged,
 		"total_unmanaged" : summary.TotalUnmanaged,
